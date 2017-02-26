@@ -1,5 +1,6 @@
 module Helpers exposing (..)
 
+import Debug exposing (log)
 import List
 import Tuple
 import Types exposing (..)
@@ -13,8 +14,19 @@ linearScale scale value =
 
         ( r0, r1 ) =
             scale.range
+
+        normalizedValue =
+            if d0 < 0 then
+                value + abs d0
+            else if d0 == 0 then
+                value
+            else
+                value - d0
+
+        _ =
+            log "division" ((r1 - r0) / (d1 - d0))
     in
-        value * ((r1 - r0) / (d1 - d0))
+        normalizedValue * ((abs (r1 - r0)) / (abs (d1 - d0)))
 
 
 flip : Range -> Float -> Float
