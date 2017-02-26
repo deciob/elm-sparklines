@@ -14,19 +14,8 @@ linearScale scale value =
 
         ( r0, r1 ) =
             scale.range
-
-        normalizedValue =
-            if d0 < 0 then
-                value + abs d0
-            else if d0 == 0 then
-                value
-            else
-                value - d0
-
-        _ =
-            log "division" ((r1 - r0) / (d1 - d0))
     in
-        normalizedValue * ((abs (r1 - r0)) / (abs (d1 - d0)))
+        ((r1 - r0) / (d1 - d0)) * (value - d0) + r0
 
 
 flip : Range -> Float -> Float
